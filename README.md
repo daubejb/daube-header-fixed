@@ -20,6 +20,13 @@ Include the <daube-header-fixed> custom element in the html page
 ```html
 <daube-header-fixed></daube-header-fixed>
 ```
+**Additionally** - remember to reset the css:
+```html
+body {
+  margin: 0;
+  padding: 0;
+}
+```
 
 ## Options
 
