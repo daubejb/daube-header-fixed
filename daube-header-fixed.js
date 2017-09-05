@@ -21,7 +21,7 @@ template.innerHTML = `
       position: fixed;
       top: 0;
       background-color: #237d32;
-      color: rgba(255,255,255,0.81);
+      color: rgba(255,255,255,0.92);
       height: 3.5rem;
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
@@ -34,6 +34,7 @@ template.innerHTML = `
     }
 
   </style>
+
   <header>
     <div class="daubemaintitle">Header</div>
     <slot></slot>
@@ -45,17 +46,52 @@ if (window.ShadyCSS) {
 }
 
 class DaubeHeaderFixed extends HTMLElement {
-  static get observedAttributes() {}
+  static get observedAttributes() {
+    return ['headercolor']
+  }
+
+  get headercolor() {
+    return this._headercolor;
+  }
+
+  set headercolor(v) {
+    if (this._headercolor === v) return;
+      this._headercolor = v;
+      this.setAttribute('headercolor', v);
+  }
+
+  attributeChangedCallback (name, oldValue, newValue) {
+    const hasValue = newValue !== null;
+
+    switch (name) {
+      case 'headercolor':
+        this.processHeaderColor();
+        break;
+    }
+  }
+
   constructor() {
     super();
-    
+
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
+
   connectedCallback() {
     if (window.ShadyCSS) {
       ShadyCSS.styleElement(this);
     }
   }
+
+  processHeaderColor() {
+    var daubeHeader = this.shadowRoot.querySelector('header');
+
+    if (this.hasAttribute('headercolor')) {
+      daubeHeader.style.backgroundColor = this.getAttribute('headercolor');
+    } else {
+      daubeHeader.style.removeProperty('background-color');
+    }
+  }
+
 } // Class CustomElement
 customElements.define("daube-header-fixed", DaubeHeaderFixed);

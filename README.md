@@ -20,7 +20,7 @@ Include the <daube-header-fixed> custom element in the html page
 ```html
 <daube-header-fixed></daube-header-fixed>
 ```
-**Additionally** - remember to reset the css:
+**Additionally** - remember to reset the css of the body in the page that contains this 'daube-header-fixed' tag:
 ```html
 body {
   margin: 0;
@@ -30,7 +30,10 @@ body {
 
 ## Options
 
-The following options are available within the daube-header-fixed tag:
+The following options are available manually or programatically within the opening daube-header-fixed tag:
+
+  1. headercolor - ```headercolor="rgba(0,0,0,1)"```
+    - hexcodes OR rgb OR rgba
 
 
 
