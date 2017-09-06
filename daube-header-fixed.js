@@ -47,7 +47,19 @@ if (window.ShadyCSS) {
 
 class DaubeHeaderFixed extends HTMLElement {
   static get observedAttributes() {
-    return ['headercolor']
+    return ['headertitle',
+            'headercolor'
+          ]
+  }
+
+  get headertitle() {
+    return this._headertitle;
+  }
+
+  set headertitle(v) {
+    if (this._headertitle === v) return;
+    this._headertitle = v;
+    this.setAttribute('headertitle', v);
   }
 
   get headercolor() {
@@ -67,6 +79,10 @@ class DaubeHeaderFixed extends HTMLElement {
       case 'headercolor':
         this.processHeaderColor();
         break;
+
+      case 'headertitle':
+        this.processHeaderTitle();
+        break;
     }
   }
 
@@ -83,14 +99,30 @@ class DaubeHeaderFixed extends HTMLElement {
     }
   }
 
+  processHeaderTitle() {
+    var daubeMainTitle = this.getMainTitle();
+    if (this.hasAttribute('headertitle')) {
+      daubeMainTitle.innerHTML = this.getAttribute('headertitle');
+    } else {
+      daubeMainTitle.innerHTML = '';
+    }
+  }
   processHeaderColor() {
-    var daubeHeader = this.shadowRoot.querySelector('header');
+    var daubeHeader = this.getHeader();
 
     if (this.hasAttribute('headercolor')) {
       daubeHeader.style.backgroundColor = this.getAttribute('headercolor');
     } else {
       daubeHeader.style.removeProperty('background-color');
     }
+  }
+
+  getHeader() {
+    return this.shadowRoot.querySelector('header');
+  }
+
+  getMainTitle() {
+    return this.shadowRoot.querySelector('.daubemaintitle');
   }
 
 } // Class CustomElement

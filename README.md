@@ -34,6 +34,7 @@ The following options are available manually or programatically within the openi
 
   1. headercolor - ```headercolor="rgba(0,0,0,1)"```
     - hexcodes OR rgb OR rgba
+  2. headertitle - ```headertitle="The Site Name"```
 
 
 
