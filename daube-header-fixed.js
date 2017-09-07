@@ -25,6 +25,7 @@ template.innerHTML = `
       color: rgba(255,255,255,0.92);
       height: 3.5rem;
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      z-index: 3;
     }
 
     .daubemaintitle {
@@ -32,6 +33,7 @@ template.innerHTML = `
       font-weight: 200;
       font-size: 1.66rem;
       height: 3.5rem;
+      z-index: 4;
     }
 
   </style>
